@@ -1,12 +1,17 @@
 #!/bin/bash
 
+
+
 pushd()
 {
     dirname=$1
     first_symbol=${dirname:0:1}
     if cd ${dirname:?"missing directory name."}
-    then 
-        DIR_STACK="$PWD $DIR_STACK"
+    then
+        if [ "$PWD" != "$OLDPWD" ]
+        then
+            DIR_STACK="$PWD $DIR_STACK"
+        fi
         echo "$DIR_STACK" 
     fi       
 }
